@@ -23,22 +23,9 @@ class StoreUpdateUserRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'name' => [
-                'required',
-                'min:3',
-                'max:255'
-            ],
-            'email' => [
-                'required',
-                'email',
-                'max:255',
-                'unique:users'
-            ],
-            'password' => [
-                'required',
-                'min:6',
-                'max:50',
-            ]
+            'name' => 'required|string|between:2,100',
+            'email' => 'required|string|email|max:100|unique:users',
+            'password' => 'required|string|min:6',
         ];
 
         if($this->method() === 'PATCH'){

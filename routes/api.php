@@ -19,19 +19,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::post('/login', [AuthController::class, 'login']);
-
 Route::group([
     'prefix' => 'auth'
 ], function ($router) {
     Route::post('/login', [AuthController::class, 'login']);
-    // Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/register', [AuthController::class, 'register']);
     // Route::post('/logout', [AuthController::class, 'logout']);
     // Route::post('/refresh', [AuthController::class, 'refresh']);
     // Route::get('/user-profile', [AuthController::class, 'userProfile']);
 });
 
-Route::apiResource('/users', UserController::class)->middleware('auth:api');
 Route::apiResource('/produtos', ProdutoController::class)->middleware('auth:api');
 Route::apiResource('/cidades', CidadesController::class)->middleware('auth:api');
 Route::apiResource('/marcas', MarcaController::class)->middleware('auth:api');
