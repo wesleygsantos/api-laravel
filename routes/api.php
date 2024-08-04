@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\CidadesController;
+use App\Http\Controllers\Api\MarcaController;
+use App\Http\Controllers\Api\ProdutoController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +21,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::apiResource('/users', UserController::class);
+// Route::middleware('api')->apiResource('/produtos', ProdutoController::class);
+Route::apiResource('/produtos', ProdutoController::class);
+Route::apiResource('/cidades', CidadesController::class);
+Route::apiResource('/marcas', MarcaController::class);
+
+Route::middleware('api')->get('/', function () {
+    return response()->json([
+        'success' => true
+    ]);
 });
